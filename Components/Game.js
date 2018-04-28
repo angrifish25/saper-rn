@@ -133,11 +133,11 @@ class Area extends Component {
             });
 
             if (!oItem.isBomb && oItem.innerValue == 0) {
-                for (let k=0; k<9; k++){
+                for (let k=0; k<9; k++) {
                     let key = `${y-((Math.floor(k/3)-1))}_${x-(((k%3)-1))}`;
                     let block = areaArray.filter((item) => item.key == key)[0];
 
-                    if (block) {
+                    if (block && !block.isFlag) {
                         this.onPressBlock.call(this, block);
                     }
                 }
@@ -169,7 +169,7 @@ class Area extends Component {
         
         return (
             <TouchableOpacity key={key} style={ [styles.block, {backgroundColor, width: widthB, height: heightB}] } onLongPress={this.onSetFlag.bind(this, props)} onPress={this.onPressBlock.bind(this, props)}>
-                <Text>{isOpen ? sValue : ''}</Text>
+                <Text>{isOpen ? sValue : isFlag ? '🚩' : ''}</Text>
             </TouchableOpacity>);
     }
 
@@ -189,7 +189,7 @@ class Area extends Component {
                             });
                             this.generateGame();
                         }}>
-                        <Ionicons name="add-to-list" size={32} color="green" />
+                        <Text style={styles.btnReload}>Перезагрузить</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.area}>
@@ -216,7 +216,7 @@ class Area extends Component {
                         this.generateGame();
                     }}>
                         <View style={styles.modal}>
-                        <Text style={styles.mainText}>{ finish == 1 ? 'Win' : finish == 2 ? 'Lose' : null }</Text>
+                        <Text style={styles.mainText}>{ finish == 1 ? 'Победа!' : finish == 2 ? 'Вы проиграли!' : null }</Text>
 
                         <TouchableOpacity
                             style={styles.buttonNewGame}
@@ -284,6 +284,9 @@ const styles = StyleSheet.create({
     container: {
 
         marginTop: 60
+    },
+    btnReload: {
+        fontSize: 28,
     },
     area: {
         paddingTop: 40,
