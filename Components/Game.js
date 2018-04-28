@@ -225,7 +225,7 @@ class Area extends Component {
                                 finish: 0
                             });
                             }}>
-                            <Text style={styles.textButton}>New game!</Text>
+                            <Text style={styles.textButton}>Новая игра</Text>
                         </TouchableOpacity>
                         </View>
                 </Modal>
