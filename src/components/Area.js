@@ -1,22 +1,21 @@
-import React, { Component, PureComponent } from 'react';
-import { AsyncStorage, StyleSheet, Text, View, TouchableOpacity, Dimensions, Modal } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React, { Component } from 'react';
 
-const {height, width} = Dimensions.get('window')
+import { StyleSheet, 
+    Text, 
+    View, 
+    TouchableOpacity, 
+    Dimensions, 
+    Modal 
+} from 'react-native';
+import checkBomb from '../helpers/checkBomb';
+const {height, width} = Dimensions.get('window');
 
-function checkBomb(key, area) {
-
-    let block = area.filter((item) => item.key == key)[0];
-    return block?(block.isBomb?1:0):0;
-}
-
-class Area extends Component {
+export default class Area extends Component {
     state = {
         bombs: 0,
         areaArray: [],
         finish: 0
     }
-    blocks = {}
     complexity = {
         easy: {
             width: 10,
@@ -24,6 +23,7 @@ class Area extends Component {
             bomb: 20
         },
     }
+
     generateGame() {
         const complexity  = this.complexity[this.props.complexity],
         maxBombs = complexity.bomb;
@@ -69,9 +69,9 @@ class Area extends Component {
         })
     }
     componentDidMount () {
-
         this.generateGame();
     }
+    
     onSetFlag(oItem) {
         if (!oItem.isOpen) {
             const { areaArray } = this.state;
@@ -233,14 +233,6 @@ class Area extends Component {
         )
     }
 }
-export default class Game extends Component {
-    render() {
-        const { complexity } = this.props
-        return <Area {...{complexity}} />
-    }
-}
-
-
 
 const styles = StyleSheet.create({
     header: {

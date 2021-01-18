@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-import Game from './Components/Game';
+import Game from './src/components/Game';
 
 const {height, width} = Dimensions.get('window')
 
